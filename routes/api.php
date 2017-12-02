@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('mattermost/sentry/{id}', 'Api\Mattermost\SentryController@sync');
+Route::post('mattermost/sentry/{channel}', 'Api\Mattermost\SentryController@sync');

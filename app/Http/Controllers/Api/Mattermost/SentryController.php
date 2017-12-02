@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api\Mattermost;
 
-use App\SentryToMattermost;
+use App\Mattermost;
 use Illuminate\Http\Request;
 use App\Hooks\Mattermost\Sentry;
 use App\Http\Controllers\Controller;
 
 class SentryController extends Controller
 {
-    public function sync($id, Request $request)
+    public function sync($channel, Request $request)
     {
-        $url = SentryToMattermost::with('mattermost')->find($id)->mattermost->mattermost_url;
+        $url = Mattermost::where('mattermost_channel', $channel)->first()->mattermost_url;
         $client = new Sentry($url, $request->all());
         dd($client->sync());
     }
